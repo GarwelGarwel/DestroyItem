@@ -12,8 +12,8 @@ namespace DestroyItem
             {
                 defaultLabel = "Destroy",
                 defaultDesc = "Order a pawn to destroy this item",
-                icon = ContentFinder<Texture2D>.Get("DestroyItem"),
-                action = () => parent.Destroy()
+                icon = ContentFinder<Texture2D>.Get("Command"),
+                action = () => parent.Map.designationManager.AddDesignation(new Designation(parent, DestroyItemDefOf.Designation_DestroyItem))
             };
         }
     }

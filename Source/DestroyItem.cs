@@ -20,6 +20,7 @@ namespace DestroyItem
                 else Utility.Log($"Error: Could not add CompDestructible to {def.defName} ({def.thingClass.Name})!", LogLevel.Error);
             }
             Utility.Log($"{patched} out of {thingDefs.Count} eligible ThingDefs patched.");
+            
         }
     }
 }
