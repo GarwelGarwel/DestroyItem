@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+ 
+	<RecordDef>
+		<defName>Record_ItemsDestroyed</defName>
+		<label>items destroyed</label>
+		<description>The number of items I have destroyed.</description>
+		<type>Int</type>
+	</RecordDef>
+	
+</Defs>

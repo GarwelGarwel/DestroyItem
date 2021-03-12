@@ -28,7 +28,10 @@ namespace DestroyItem
                     item.Destroy();
                 }
                 if (item.Destroyed)
+                {
+                    pawn.records.Increment(DestroyItemDefOf.Record_ItemsDestroyed);
                     ReadyForNextToil();
+                }
             };
             destroyToil.defaultCompleteMode = ToilCompleteMode.Never;
             destroyToil.WithProgressBar(TargetIndex.A, () => 1f - (float)job.targetA.Thing.HitPoints / job.targetA.Thing.MaxHitPoints);

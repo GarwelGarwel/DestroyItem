@@ -15,6 +15,8 @@ namespace DestroyItem
 
         public static JobDef Job_DestroyItem;
 
+        public static RecordDef Record_ItemsDestroyed;
+
         public static WorkGiverDef WorkGiver_DestroyItem;
     }
 }
