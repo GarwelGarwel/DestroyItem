@@ -14,12 +14,12 @@ namespace DestroyItem
             Utility.Log($"Making new toils for {pawn} to destroy {TargetThingA.LabelCap}...");
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOnThingMissingDesignation(TargetIndex.A, DestroyItemDefOf.Designation_DestroyItem);
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.OnCell);
+            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
             Toil destroyToil = new Toil();
             destroyToil.tickAction = () =>
             {
                 Thing item = job.targetA.Thing;
-                float hpDestructionPerTick = 1;  // TODO: make dependent on Manipulation etc.
+                float hpDestructionPerTick = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) / GenTicks.TicksPerRealSecond;
                 if (item.HitPoints > hpDestructionPerTick)
                     item.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, hpDestructionPerTick));
                 else

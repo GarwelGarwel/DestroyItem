@@ -10,7 +10,7 @@ namespace DestroyItem
         static DestroyItem()
         {
             Utility.Log($"Total {DefDatabase<ThingDef>.DefCount} ThingDefs found.");
-            List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefs.Where(def => typeof(ThingWithComps).IsAssignableFrom(def.thingClass) && def.category == ThingCategory.Item).ToList();
+            List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefs.Where(def => typeof(ThingWithComps).IsAssignableFrom(def.thingClass) && def.category == ThingCategory.Item && def.destroyable).ToList();
             int patched = 0;
             foreach (ThingDef def in thingDefs)
             {
