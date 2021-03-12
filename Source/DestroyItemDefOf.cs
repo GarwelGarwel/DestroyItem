@@ -12,5 +12,9 @@ namespace DestroyItem
     class DestroyItemDefOf
     {
         public static DesignationDef Designation_DestroyItem;
+
+        public static JobDef Job_DestroyItem;
+
+        public static WorkGiverDef WorkGiver_DestroyItem;
     }
 }

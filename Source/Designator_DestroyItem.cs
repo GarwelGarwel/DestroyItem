@@ -30,12 +30,11 @@ namespace DestroyItem
 
         public override void DesignateSingleCell(IntVec3 c) => DesignateThing(DestructibleInCell(c));
 
-        public override AcceptanceReport CanDesignateThing(Thing t) => t.def.HasComp(typeof(CompDestructible)) && Map.designationManager.DesignationOn(t, Designation) == null;// && (t.Faction == null || t.Faction.IsPlayer);
+        public override AcceptanceReport CanDesignateThing(Thing t) => t.def.HasComp(typeof(CompDestructible)) && !t.IsDesignatedForDestruction();
 
         public override void DesignateThing(Thing t)
         {
-            Utility.Log($"Designating {t.LabelCap} ({t.def.defName}) for destruction.");
-            Map.designationManager.AddDesignation(new Designation(t, Designation));
+            t.DesignateForDestruction();
         }
 
         Thing DestructibleInCell(IntVec3 loc) => loc.GetThingList(Map).FirstOrFallback(thing => CanDesignateThing(thing).Accepted);

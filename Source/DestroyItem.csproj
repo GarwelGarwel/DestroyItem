@@ -65,8 +65,10 @@
     <Compile Include="Designator_DestroyItem.cs" />
     <Compile Include="DestroyItem.cs" />
     <Compile Include="DestroyItemDefOf.cs" />
+    <Compile Include="JobDriver_DestroyItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="WorkGiver_DestroyItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

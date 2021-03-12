@@ -1,9 +1,20 @@
-﻿namespace DestroyItem
+﻿using Verse;
+
+namespace DestroyItem
 {
     enum LogLevel { Message = 0, Warning, Error };
 
-    class Utility
+    public static class Utility
     {
+        public static bool IsDesignatedForDestruction(this Thing thing) =>
+            thing.Map.designationManager.DesignationOn(thing, DestroyItemDefOf.Designation_DestroyItem) != null;
+
+        public static void DesignateForDestruction(this Thing thing)
+        {
+            Log($"Designating {thing.LabelCap} ({thing.def.defName}) for destruction.");
+            thing.Map.designationManager.AddDesignation(new Designation(thing, DestroyItemDefOf.Designation_DestroyItem));
+        }
+
         internal static void Log(string message, LogLevel logLevel = LogLevel.Message)
         {
             message = $"[DestroyItem] {message}";
@@ -11,7 +22,7 @@
             {
                 case LogLevel.Message:
                     //if (Settings.DebugLogging)
-                        Verse.Log.Message(message);
+                    Verse.Log.Message(message);
                     break;
 
                 case LogLevel.Warning:
