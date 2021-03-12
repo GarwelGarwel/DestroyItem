@@ -17,6 +17,9 @@ namespace DestroyItem
 
         public static RecordDef Record_ItemsDestroyed;
 
+        public static ThoughtDef Thought_DestroyedCorpse;
+        public static ThoughtDef Thought_KnowDestroyedCorpse;
+
         public static WorkGiverDef WorkGiver_DestroyItem;
     }
 }
