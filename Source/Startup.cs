@@ -5,9 +5,9 @@ using Verse;
 namespace DestroyItem
 {
     [StaticConstructorOnStartup]
-    public static class DestroyItem
+    public static class Startup
     {
-        static DestroyItem()
+        static Startup()
         {
             Utility.Log($"Total {DefDatabase<ThingDef>.DefCount} ThingDefs found.");
             List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefs.Where(def => typeof(ThingWithComps).IsAssignableFrom(def.thingClass) && def.category == ThingCategory.Item && def.destroyable).ToList();

@@ -63,7 +63,7 @@
   <ItemGroup>
     <Compile Include="CompDestructible.cs" />
     <Compile Include="Designator_DestroyItem.cs" />
-    <Compile Include="DestroyItem.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="DestroyItemDefOf.cs" />
     <Compile Include="JobDriver_DestroyItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

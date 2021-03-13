@@ -8,6 +8,8 @@ namespace DestroyItem
     {
         public override int DraggableDimensions => 2;
 
+        protected override DesignationDef Designation => DestroyItemDefOf.Designation_DestroyItem;
+
         public Designator_DestroyItem()
         {
             defaultLabel = "Destroy Item";
@@ -18,8 +20,6 @@ namespace DestroyItem
             soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
             soundSucceeded = SoundDefOf.Designate_Deconstruct;
         }
-
-        protected override DesignationDef Designation => DestroyItemDefOf.Designation_DestroyItem;
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
         {
@@ -32,10 +32,7 @@ namespace DestroyItem
 
         public override AcceptanceReport CanDesignateThing(Thing t) => t.def.HasComp(typeof(CompDestructible)) && !t.IsDesignatedForDestruction();
 
-        public override void DesignateThing(Thing t)
-        {
-            t.DesignateForDestruction();
-        }
+        public override void DesignateThing(Thing t) => t.DesignateForDestruction();
 
         Thing DestructibleInCell(IntVec3 loc) => loc.GetThingList(Map).FirstOrFallback(thing => CanDesignateThing(thing).Accepted);
     }
