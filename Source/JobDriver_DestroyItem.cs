@@ -19,11 +19,13 @@ namespace DestroyItem
             Toil destroyToil = new Toil();
             destroyToil.tickAction = () =>
             {
+                if (GenTicks.TicksAbs % GenTicks.TicksPerRealSecond != 0)
+                    return;
                 Thing item = job.targetA.Thing;
-                float hpDestructionPerTick = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) / GenTicks.TicksPerRealSecond;
+                float hpLossAmount = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed);
                 bool isHumanlikeCorpse = item is Corpse corpse && corpse.InnerPawn.RaceProps.Humanlike;
-                if (item.HitPoints > hpDestructionPerTick)
-                    item.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, hpDestructionPerTick));
+                if (item.HitPoints > hpLossAmount)
+                    item.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, hpLossAmount));
                 else
                 {
                     item.HitPoints = 0;
