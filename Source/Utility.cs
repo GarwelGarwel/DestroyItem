@@ -21,8 +21,8 @@ namespace DestroyItem
             switch (logLevel)
             {
                 case LogLevel.Message:
-                    //if (Settings.DebugLogging)
-                    Verse.Log.Message(message);
+                    if (Prefs.DevMode)
+                        Verse.Log.Message(message);
                     break;
 
                 case LogLevel.Warning:
