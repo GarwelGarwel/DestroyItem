@@ -21,12 +21,8 @@ namespace DestroyItem
             soundSucceeded = SoundDefOf.Designate_Deconstruct;
         }
 
-        public override AcceptanceReport CanDesignateCell(IntVec3 loc)
-        {
-            if (!loc.InBounds(Map) || !DebugSettings.godMode && loc.Fogged(Map))
-                return false;
-            return DestructibleInCell(loc) != null;
-        }
+        public override AcceptanceReport CanDesignateCell(IntVec3 loc) =>
+            loc.InBounds(Map) && (DebugSettings.godMode || !loc.Fogged(Map)) ? (AcceptanceReport)(DestructibleInCell(loc) != null) : false;
 
         public override void DesignateSingleCell(IntVec3 c) => DesignateThing(DestructibleInCell(c));
 
