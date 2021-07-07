@@ -22,7 +22,7 @@ namespace DestroyItem
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc) =>
-            loc.InBounds(Map) && (DebugSettings.godMode || !loc.Fogged(Map)) ? (AcceptanceReport)(DestructibleInCell(loc) != null) : false;
+            loc.InBounds(Map) && (DebugSettings.godMode || !loc.Fogged(Map)) && DestructibleInCell(loc) != null;
 
         public override void DesignateSingleCell(IntVec3 c) => DesignateThing(DestructibleInCell(c));
 
