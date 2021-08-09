@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<ThoughtDef>
+		<defName>Thought_DestroyedCorpse</defName>
+		<durationDays>4</durationDays>
+		<stackLimit>10</stackLimit>
+		<stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+		<nullifyingTraits>
+			<li>Psychopath</li>
+			<li>Bloodlust</li>
+			<li>Cannibal</li>
+		</nullifyingTraits>
+		<nullifyingPrecepts>
+			<li>Cannibalism_Acceptable</li>
+			<li>Cannibalism_Preferred</li>
+			<li>Cannibalism_RequiredRavenous</li>
+			<li>Corpses_DontCare</li>
+		</nullifyingPrecepts>
+		<stages>
+			<li>
+				<label>I destroyed corpse</label>
+				<description>I had to cut a humanlike corpse into little pieces. Disgusting!</description>
+				<baseMoodEffect>-4</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>Thought_KnowDestroyedCorpse</defName>
+		<durationDays>4</durationDays>
+		<stackLimit>1</stackLimit>
+		<nullifyingTraits>
+			<li>Psychopath</li>
+			<li>Bloodlust</li>
+			<li>Cannibal</li>
+		</nullifyingTraits>
+		<nullifyingPrecepts>
+			<li>Cannibalism_Acceptable</li>
+			<li>Cannibalism_Preferred</li>
+			<li>Cannibalism_RequiredRavenous</li>
+			<li>Corpses_DontCare</li>
+		</nullifyingPrecepts>
+		<stages>
+			<li>
+				<label>we destroyed corpse</label>
+				<description>We cut a humanlike corpse into pieces.</description>
+				<baseMoodEffect>-4</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+</Defs>
