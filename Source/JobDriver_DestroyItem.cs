@@ -19,14 +19,13 @@ namespace DestroyItem
             Toil destroyToil = new Toil();
             destroyToil.tickAction = () =>
             {
-                if (GenTicks.TicksAbs % GenTicks.TicksPerRealSecond != 0)
+               if (!TargetThingA.IsHashIntervalTick(GenTicks.TicksPerRealSecond))
                     return;
-                Thing item = job.targetA.Thing;
                 float hpLossAmount = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) * Settings.destructionSpeed;
-                if (Settings.instantDestruction || hpLossAmount >= item.HitPoints)
+                if (Settings.instantDestruction || hpLossAmount >= TargetThingA.HitPoints)
                 {
                     pawn.records.Increment(DestroyItemDefOf.Record_ItemsDestroyed);
-                    if (item is Corpse corpse && corpse.InnerPawn.RaceProps.Humanlike)
+                    if (TargetThingA is Corpse corpse && corpse.InnerPawn.RaceProps.Humanlike)
                     {
                         Utility.Log($"The destroyed item was a humanlike corpse. Adding bad thoughts to {pawn} and other pawns.");
                         if (pawn.needs?.mood?.thoughts != null)
@@ -34,11 +33,11 @@ namespace DestroyItem
                         foreach (Pawn p in pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(p => pawn != p && p.needs?.mood?.thoughts != null))
                             p.needs.mood.thoughts.memories.TryGainMemory(DestroyItemDefOf.Thought_KnowDestroyedCorpse);
                     }
-                    item.HitPoints = 0;
-                    item.Destroy();
+                    TargetThingA.HitPoints = 0;
+                    TargetThingA.Destroy();
                     ReadyForNextToil();
                 }
-                else item.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, hpLossAmount));
+                else TargetThingA.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, hpLossAmount, instigator: pawn));
             };
             destroyToil.defaultCompleteMode = ToilCompleteMode.Never;
             destroyToil.WithProgressBar(TargetIndex.A, () => 1f - (float)job.targetA.Thing.HitPoints / job.targetA.Thing.MaxHitPoints);

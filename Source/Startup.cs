@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Verse;
 
 namespace DestroyItem
@@ -9,18 +8,14 @@ namespace DestroyItem
     {
         static Startup()
         {
-            Utility.Log($"Total {DefDatabase<ThingDef>.DefCount} ThingDefs found.");
-            List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefs.Where(def => typeof(ThingWithComps).IsAssignableFrom(def.thingClass) && def.category == ThingCategory.Item && def.destroyable).ToList();
+            Utility.Log($"Total {DefDatabase<ThingDef>.DefCount.ToStringCached()} ThingDefs found.");
             int patched = 0;
-            foreach (ThingDef def in thingDefs)
+            foreach (ThingDef def in DefDatabase<ThingDef>.AllDefs.Where(def => typeof(ThingWithComps).IsAssignableFrom(def.thingClass) && def.category == ThingCategory.Item && def.destroyable))
             {
                 def.comps.Add(new CompProperties(typeof(CompDestructible)));
-                if (def.HasComp(typeof(CompDestructible)))
-                    patched++;
-                else Utility.Log($"Error: Could not add CompDestructible to {def.defName} ({def.thingClass.Name})!", LogLevel.Error);
+                patched++;
             }
-            Utility.Log($"{patched} out of {thingDefs.Count} eligible ThingDefs patched.");
-            
+            Utility.Log($"{patched.ToStringCached()} ThingDefs patched.");
         }
     }
 }

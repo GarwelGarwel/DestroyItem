@@ -2,7 +2,12 @@
 
 namespace DestroyItem
 {
-    enum LogLevel { Message = 0, Warning, Error };
+    internal enum LogLevel
+    {
+        Message = 0,
+        Warning,
+        Error
+    };
 
     public static class Utility
     {
