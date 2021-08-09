@@ -12,12 +12,6 @@
 			<li>Bloodlust</li>
 			<li>Cannibal</li>
 		</nullifyingTraits>
-		<nullifyingPrecepts>
-			<li>Cannibalism_Acceptable</li>
-			<li>Cannibalism_Preferred</li>
-			<li>Cannibalism_RequiredRavenous</li>
-			<li>Corpses_DontCare</li>
-		</nullifyingPrecepts>
 		<stages>
 			<li>
 				<label>I destroyed corpse</label>
@@ -36,12 +30,6 @@
 			<li>Bloodlust</li>
 			<li>Cannibal</li>
 		</nullifyingTraits>
-		<nullifyingPrecepts>
-			<li>Cannibalism_Acceptable</li>
-			<li>Cannibalism_Preferred</li>
-			<li>Cannibalism_RequiredRavenous</li>
-			<li>Corpses_DontCare</li>
-		</nullifyingPrecepts>
 		<stages>
 			<li>
 				<label>we destroyed corpse</label>
