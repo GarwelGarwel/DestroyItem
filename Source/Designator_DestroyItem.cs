@@ -1,4 +1,6 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -22,14 +24,18 @@ namespace DestroyItem
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc) =>
-            loc.InBounds(Map) && (DebugSettings.godMode || !loc.Fogged(Map)) && DestructibleInCell(loc) != null;
+            loc.InBounds(Map) && (DebugSettings.godMode || !loc.Fogged(Map)) && DestructiblesInCell(loc).Any();
 
-        public override void DesignateSingleCell(IntVec3 c) => DesignateThing(DestructibleInCell(c));
+        public override void DesignateSingleCell(IntVec3 c)
+        {
+            foreach (Thing thing in DestructiblesInCell(c))
+                DesignateThing(thing);
+        }
 
         public override AcceptanceReport CanDesignateThing(Thing t) => t.def.HasComp(typeof(CompDestructible)) && !t.IsDesignatedForDestruction();
 
         public override void DesignateThing(Thing t) => t.DesignateForDestruction();
 
-        Thing DestructibleInCell(IntVec3 loc) => loc.GetThingList(Map).FirstOrFallback(thing => CanDesignateThing(thing).Accepted);
+        IEnumerable<Thing> DestructiblesInCell(IntVec3 loc) => loc.GetThingList(Map).Where(thing => CanDesignateThing(thing).Accepted);
     }
 }

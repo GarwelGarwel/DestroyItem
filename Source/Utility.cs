@@ -12,7 +12,7 @@ namespace DestroyItem
     public static class Utility
     {
         public static bool IsDesignatedForDestruction(this Thing thing) =>
-            thing.Map.designationManager.DesignationOn(thing, DestroyItemDefOf.Designation_DestroyItem) != null;
+            thing?.Map?.designationManager?.DesignationOn(thing, DestroyItemDefOf.Designation_DestroyItem) != null;
 
         public static void DesignateForDestruction(this Thing thing)
         {
