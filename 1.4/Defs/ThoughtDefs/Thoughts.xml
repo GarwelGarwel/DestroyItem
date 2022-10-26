@@ -5,8 +5,14 @@
 	<ThoughtDef>
 		<defName>Thought_DestroyedCorpse</defName>
 		<durationDays>4</durationDays>
-		<stackLimit>10</stackLimit>
 		<stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+		<nullifyingPrecepts MayRequire="Ludeon.RimWorld.Ideology">
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Corpses_DontCare</li>
+		</nullifyingPrecepts>
 		<nullifyingTraits>
 			<li>Psychopath</li>
 			<li>Bloodlust</li>
@@ -14,7 +20,7 @@
 		</nullifyingTraits>
 		<stages>
 			<li>
-				<label>I destroyed corpse</label>
+				<label>Destroying corpse</label>
 				<description>I had to cut a humanlike corpse into little pieces. Disgusting!</description>
 				<baseMoodEffect>-4</baseMoodEffect>
 			</li>
@@ -24,7 +30,13 @@
 	<ThoughtDef>
 		<defName>Thought_KnowDestroyedCorpse</defName>
 		<durationDays>4</durationDays>
-		<stackLimit>1</stackLimit>
+		<nullifyingPrecepts>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Corpses_DontCare</li>
+		</nullifyingPrecepts>
 		<nullifyingTraits>
 			<li>Psychopath</li>
 			<li>Bloodlust</li>
@@ -34,7 +46,32 @@
 			<li>
 				<label>we destroyed corpse</label>
 				<description>We cut a humanlike corpse into pieces.</description>
-				<baseMoodEffect>-4</baseMoodEffect>
+				<baseMoodEffect>-3</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>Thought_DestroyedEmbryo</defName>
+		<durationDays>2</durationDays>
+		<stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+		<nullifyingPrecepts MayRequire="Ludeon.RimWorld.Ideology">
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Corpses_DontCare</li>
+		</nullifyingPrecepts>
+		<nullifyingTraits>
+			<li>Psychopath</li>
+			<li>Bloodlust</li>
+			<li>Cannibal</li>
+		</nullifyingTraits>
+		<stages>
+			<li>
+				<label>I destroyed embryo</label>
+				<description>I had to destroy a little unborn human.</description>
+				<baseMoodEffect>-2</baseMoodEffect>
 			</li>
 		</stages>
 	</ThoughtDef>

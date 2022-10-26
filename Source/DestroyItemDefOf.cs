@@ -16,6 +16,7 @@ namespace DestroyItem
 
         public static ThoughtDef Thought_DestroyedCorpse;
         public static ThoughtDef Thought_KnowDestroyedCorpse;
+        public static ThoughtDef Thought_DestroyedEmbryo;
 
         public static WorkGiverDef WorkGiver_DestroyItem;
     }
