@@ -6,6 +6,8 @@ namespace DestroyItem
     [DefOf]
     class DestroyItemDefOf
     {
+        public static DamageDef Damage_Destruction;
+
         public static DesignationDef Designation_DestroyItem;
 
         public static JobDef Job_DestroyItem;

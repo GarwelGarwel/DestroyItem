@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<DamageDef>
+		<defName>Damage_Destruction</defName>
+		<label>destruction</label>
+		<externalViolence>true</externalViolence>
+		<externalViolenceForMechanoids>true</externalViolenceForMechanoids>
+		<hasForcefulImpact>false</hasForcefulImpact>
+		<canInterruptJobs>false</canInterruptJobs>
+	</DamageDef>
+
+</Defs>

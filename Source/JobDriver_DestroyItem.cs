@@ -37,7 +37,7 @@ namespace DestroyItem
                     TargetThingA.Destroy();
                     ReadyForNextToil();
                 }
-                else TargetThingA.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, hpLossAmount, instigator: pawn));
+                else TargetThingA.TakeDamage(new DamageInfo(DestroyItemDefOf.Damage_Destruction, hpLossAmount));
             };
             destroyToil.defaultCompleteMode = ToilCompleteMode.Never;
             destroyToil.WithProgressBar(TargetIndex.A, () => 1f - (float)job.targetA.Thing.HitPoints / job.targetA.Thing.MaxHitPoints);
