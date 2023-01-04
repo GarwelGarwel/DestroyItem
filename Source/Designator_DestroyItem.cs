@@ -18,6 +18,7 @@ namespace DestroyItem
             defaultDesc = "Order a pawn to destroy this item";
             icon = ContentFinder<Texture2D>.Get("Command");
             useMouseIcon = true;
+            hotKey = DestroyItemDefOf.KeyBinding_DestroyItem;
             soundDragSustain = SoundDefOf.Designate_DragStandard;
             soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
             soundSucceeded = SoundDefOf.Designate_Deconstruct;
@@ -37,5 +38,6 @@ namespace DestroyItem
         public override void DesignateThing(Thing t) => t.DesignateForDestruction();
 
         IEnumerable<Thing> DestructiblesInCell(IntVec3 loc) => loc.GetThingList(Map).Where(thing => CanDesignateThing(thing).Accepted);
+
     }
 }

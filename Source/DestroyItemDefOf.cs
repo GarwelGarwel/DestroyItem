@@ -12,6 +12,8 @@ namespace DestroyItem
 
         public static JobDef Job_DestroyItem;
 
+        public static KeyBindingDef KeyBinding_DestroyItem;
+
         public static RecordDef Record_ItemsDestroyed;
 
         public static ThoughtDef Thought_DestroyedCorpse;

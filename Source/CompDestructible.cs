@@ -15,6 +15,7 @@ namespace DestroyItem
                 defaultLabel = "Destroy",
                 defaultDesc = "Order a pawn to destroy this item",
                 icon = ContentFinder<Texture2D>.Get("Command"),
+                hotKey = DestroyItemDefOf.KeyBinding_DestroyItem,
                 action = () => parent.DesignateForDestruction()
             };
         }
