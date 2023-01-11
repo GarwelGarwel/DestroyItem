@@ -16,7 +16,7 @@ namespace DestroyItem
 
         public static void DesignateForDestruction(this Thing thing)
         {
-            Log($"Designating {thing.LabelCap} ({thing.def.defName}) for destruction.");
+            Log($"Designating {thing} ({thing.def}) for destruction.");
             thing.Map.designationManager.AddDesignation(new Designation(thing, DestroyItemDefOf.Designation_DestroyItem));
         }
 

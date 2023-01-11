@@ -7,11 +7,11 @@
 		<durationDays>4</durationDays>
 		<stackedEffectMultiplier>0.75</stackedEffectMultiplier>
 		<nullifyingPrecepts MayRequire="Ludeon.RimWorld.Ideology">
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Corpses_DontCare</li>
+			<li>Cannibalism_Acceptable</li>
+			<li>Cannibalism_Preferred</li>
+			<li>Cannibalism_RequiredStrong</li>
+			<li>Cannibalism_RequiredRavenous</li>
+			<li>Corpses_DontCare</li>
 		</nullifyingPrecepts>
 		<nullifyingTraits>
 			<li>Psychopath</li>
@@ -30,12 +30,12 @@
 	<ThoughtDef>
 		<defName>Thought_KnowDestroyedCorpse</defName>
 		<durationDays>4</durationDays>
-		<nullifyingPrecepts>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Corpses_DontCare</li>
+		<nullifyingPrecepts MayRequire="Ludeon.RimWorld.Ideology">
+			<li>Cannibalism_Acceptable</li>
+			<li>Cannibalism_Preferred</li>
+			<li>Cannibalism_RequiredStrong</li>
+			<li>Cannibalism_RequiredRavenous</li>
+			<li>Corpses_DontCare</li>
 		</nullifyingPrecepts>
 		<nullifyingTraits>
 			<li>Psychopath</li>
@@ -56,11 +56,11 @@
 		<durationDays>2</durationDays>
 		<stackedEffectMultiplier>0.75</stackedEffectMultiplier>
 		<nullifyingPrecepts MayRequire="Ludeon.RimWorld.Ideology">
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Corpses_DontCare</li>
+			<li>Cannibalism_Acceptable</li>
+			<li>Cannibalism_Preferred</li>
+			<li>Cannibalism_RequiredStrong</li>
+			<li>Cannibalism_RequiredRavenous</li>
+			<li>Corpses_DontCare</li>
 		</nullifyingPrecepts>
 		<nullifyingTraits>
 			<li>Psychopath</li>
