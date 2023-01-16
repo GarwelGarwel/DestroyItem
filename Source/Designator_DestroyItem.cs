@@ -38,6 +38,5 @@ namespace DestroyItem
         public override void DesignateThing(Thing t) => t.DesignateForDestruction();
 
         IEnumerable<Thing> DestructiblesInCell(IntVec3 loc) => loc.GetThingList(Map).Where(thing => CanDesignateThing(thing).Accepted);
-
     }
 }
