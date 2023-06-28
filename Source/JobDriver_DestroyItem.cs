@@ -48,7 +48,10 @@ namespace DestroyItem
                     {
                         pawn.records.Increment(DestroyItemDefOf.Record_ItemsDestroyed);
                         TargetThingA.HitPoints = 0;
-                        TargetThingA.Destroy();
+                        CompDissolution compDissolution = TargetThingA.TryGetComp<CompDissolution>();
+                        if (compDissolution != null)
+                            compDissolution.TriggerDissolutionEvent(TargetThingA.stackCount);
+                        else TargetThingA.Destroy();
                         ReadyForNextToil();
                     }
                     else TargetThingA.TakeDamage(new DamageInfo(DestroyItemDefOf.Damage_Destruction, hpLossAmount));
