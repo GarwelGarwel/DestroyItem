@@ -11,7 +11,7 @@ namespace DestroyItem
         bool isDestroyingHumanlikeCorpse;
         bool isDestroyingHumanEmbryo;
 
-        public override bool TryMakePreToilReservations(bool errorOnFailed) => pawn.Reserve(TargetThingA, job, errorOnFailed: errorOnFailed);
+        public override bool TryMakePreToilReservations(bool errorOnFailed) => pawn.Reserve(TargetThingA, job, Settings.maxDestroyers, 0, errorOnFailed: errorOnFailed);
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
@@ -46,7 +46,7 @@ namespace DestroyItem
 
                     if (Settings.instantDestruction || hpLossAmount >= TargetThingA.HitPoints)
                     {
-                        pawn.records.Increment(DestroyItemDefOf.Record_ItemsDestroyed);
+                        pawn.records?.Increment(DestroyItemDefOf.Record_ItemsDestroyed);
                         TargetThingA.HitPoints = 0;
                         CompDissolution compDissolution = TargetThingA.TryGetComp<CompDissolution>();
                         if (compDissolution != null)
@@ -59,7 +59,7 @@ namespace DestroyItem
 
                 defaultCompleteMode = ToilCompleteMode.Never
             };
-            destroyToil.WithProgressBar(TargetIndex.A, () => 1 - (float)job.targetA.Thing.HitPoints / job.targetA.Thing.MaxHitPoints);
+            destroyToil.WithProgressBar(TargetIndex.A, () => 1 - (float)TargetThingA.HitPoints / TargetThingA.MaxHitPoints);
             destroyToil.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             yield return destroyToil;
             yield break;

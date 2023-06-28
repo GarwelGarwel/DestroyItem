@@ -28,6 +28,7 @@ namespace DestroyItem
                 destructionSpeedPower = (float)Math.Round(content.Slider(destructionSpeedPower, -1, 1), 2);
                 Settings.destructionSpeed = Mathf.Pow(10, destructionSpeedPower);
             }
+            Settings.maxDestroyers = Mathf.RoundToInt(content.SliderLabeled($"Max simultaneous destroyers: {Settings.maxDestroyers.ToStringCached()}", Settings.maxDestroyers, 1, 8, 0.30f, "Max number of pawns that can be destroying the same item together. Default: 2."));
             content.End();
         }
 

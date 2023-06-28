@@ -12,7 +12,7 @@ namespace DestroyItem
             pawn.Map.designationManager.SpawnedDesignationsOfDef(DestroyItemDefOf.Designation_DestroyItem).Select(designation => designation.target.Thing);
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) =>
-            pawn.CanReserve(t, ignoreOtherReservations: forced) && t.IsDesignatedForDestruction();
+            pawn.CanReserve(t, Settings.maxDestroyers, 0, ignoreOtherReservations: forced) && t.IsDesignatedForDestruction();
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) => JobMaker.MakeJob(DestroyItemDefOf.Job_DestroyItem, t);
     }
