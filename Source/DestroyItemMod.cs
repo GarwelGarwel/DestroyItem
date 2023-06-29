@@ -28,7 +28,7 @@ namespace DestroyItem
                     -1,
                     1,
                     0.30f,
-                    "Relative speed of item destruction. Actual speed depends on the pawn's melee damage and general labor speed."), 2);
+                    "Relative speed of item destruction. Actual speed depends on the pawn's melee damage and general labor speed."), 1);
                 Settings.destructionSpeed = Mathf.Pow(10, destructionSpeedPower);
                 Settings.maxDestroyers = Mathf.RoundToInt(content.SliderLabeled(
                     $"Max simultaneous destroyers: {Settings.maxDestroyers.ToStringCached()}",

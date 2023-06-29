@@ -23,23 +23,24 @@ namespace DestroyItem
             isDestroyingHumanlikeCorpse = TargetThingA is Corpse corpse && corpse.InnerPawn.RaceProps.Humanlike;
             isDestroyingHumanEmbryo = TargetThingA.def.defName == "HumanEmbryo";
             if (isDestroyingHumanlikeCorpse)
-                Utility.Log($"The item {TargetThingA} being destroyed is a humanlike corpse. {pawn} will get {DestroyItemDefOf.Thought_DestroyedCorpse} and other colonists {DestroyItemDefOf.Thought_KnowDestroyedCorpse} thoughts.");
+                Utility.Log($"The item {TargetThingA} being destroyed is a humanlike corpse. All colonists will get {DestroyItemDefOf.Thought_KnowDestroyedCorpse} thoughts and {pawn} also {DestroyItemDefOf.Thought_DestroyedCorpse}.");
             else if (isDestroyingHumanEmbryo)
-                Utility.Log($"The item {TargetThingA} being destroyed is a human embryo. {pawn} will get {DestroyItemDefOf.Thought_DestroyedEmbryo} thought).");
+                Utility.Log($"The item {TargetThingA} being destroyed is a human embryo. {pawn} will get a {DestroyItemDefOf.Thought_DestroyedEmbryo} thought).");
 
             Toil destroyToil = new Toil
             {
                 tickAction = () =>
                 {
-                    if (!TargetThingA.IsHashIntervalTick(GenTicks.TicksPerRealSecond))
+                    if (Gen.HashCombine(Gen.HashCombine(0, pawn), TargetThingA.HashOffsetTicks()) % GenTicks.TicksPerRealSecond != 0)
                         return;
                     float hpLossAmount = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) * Settings.destructionSpeed;
 
                     if (isDestroyingHumanlikeCorpse)
                     {
                         pawn.needs?.mood?.thoughts?.memories.TryGainMemory(DestroyItemDefOf.Thought_DestroyedCorpse);
-                        foreach (Pawn p in pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(p => pawn != p))
-                            p.needs?.mood?.thoughts?.memories.TryGainMemory(DestroyItemDefOf.Thought_KnowDestroyedCorpse);
+                        List<Pawn> pawnsInFaction = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction);
+                        for (int i = 0; i < pawnsInFaction.Count; i++)
+                            pawnsInFaction[i].needs?.mood?.thoughts?.memories.TryGainMemory(DestroyItemDefOf.Thought_KnowDestroyedCorpse);
                     }
                     else if (isDestroyingHumanEmbryo)
                         pawn.needs?.mood?.thoughts?.memories.TryGainMemory(DestroyItemDefOf.Thought_DestroyedEmbryo);
@@ -59,7 +60,8 @@ namespace DestroyItem
 
                 defaultCompleteMode = ToilCompleteMode.Never
             };
-            destroyToil.WithProgressBar(TargetIndex.A, () => 1 - (float)TargetThingA.HitPoints / TargetThingA.MaxHitPoints);
+            if (TargetThingA.def.useHitPoints)
+                destroyToil.WithProgressBar(TargetIndex.A, () => 1 - (float)TargetThingA.HitPoints / TargetThingA.MaxHitPoints);
             destroyToil.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             yield return destroyToil;
             yield break;

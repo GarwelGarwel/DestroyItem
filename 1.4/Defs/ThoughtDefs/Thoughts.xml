@@ -5,7 +5,6 @@
 	<ThoughtDef>
 		<defName>Thought_DestroyedCorpse</defName>
 		<durationDays>4</durationDays>
-		<stackedEffectMultiplier>0.75</stackedEffectMultiplier>
 		<nullifyingPrecepts>
 			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
 			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
@@ -22,7 +21,7 @@
 			<li>
 				<label>Destroying corpse</label>
 				<description>I had to cut a humanlike corpse into little pieces. Disgusting!</description>
-				<baseMoodEffect>-4</baseMoodEffect>
+				<baseMoodEffect>-2</baseMoodEffect>
 			</li>
 		</stages>
 	</ThoughtDef>
@@ -45,7 +44,7 @@
 		<stages>
 			<li>
 				<label>we destroyed corpse</label>
-				<description>We cut a humanlike corpse into pieces.</description>
+				<description>We dismembered and destroyed a humanlike corpse.</description>
 				<baseMoodEffect>-3</baseMoodEffect>
 			</li>
 		</stages>
@@ -54,7 +53,6 @@
 	<ThoughtDef>
 		<defName>Thought_DestroyedEmbryo</defName>
 		<durationDays>2</durationDays>
-		<stackedEffectMultiplier>0.75</stackedEffectMultiplier>
 		<nullifyingPrecepts>
 			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
 			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
