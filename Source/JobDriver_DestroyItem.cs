@@ -1,6 +1,5 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using Verse;
 using Verse.AI;
 
@@ -8,9 +7,6 @@ namespace DestroyItem
 {
     public class JobDriver_DestroyItem : JobDriver
     {
-        bool isDestroyingHumanlikeCorpse;
-        bool isDestroyingHumanEmbryo;
-
         public override bool TryMakePreToilReservations(bool errorOnFailed) => pawn.Reserve(TargetThingA, job, Settings.maxDestroyers, 0, errorOnFailed: errorOnFailed);
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -20,30 +16,31 @@ namespace DestroyItem
             this.FailOnThingMissingDesignation(TargetIndex.A, DestroyItemDefOf.Designation_DestroyItem);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 
-            isDestroyingHumanlikeCorpse = TargetThingA is Corpse corpse && corpse.InnerPawn.RaceProps.Humanlike;
-            isDestroyingHumanEmbryo = TargetThingA.def.defName == "HumanEmbryo";
-            if (isDestroyingHumanlikeCorpse)
-                Utility.Log($"The item {TargetThingA} being destroyed is a humanlike corpse. All colonists will get {DestroyItemDefOf.Thought_KnowDestroyedCorpse} thoughts and {pawn} also {DestroyItemDefOf.Thought_DestroyedCorpse}.");
-            else if (isDestroyingHumanEmbryo)
-                Utility.Log($"The item {TargetThingA} being destroyed is a human embryo. {pawn} will get a {DestroyItemDefOf.Thought_DestroyedEmbryo} thought).");
-
+            int hashcode = Gen.HashCombine(pawn.GetHashCode(), TargetThingA);
             Toil destroyToil = new Toil
             {
-                tickAction = () =>
+                initAction= () =>
                 {
-                    if (Gen.HashCombine(Gen.HashCombine(0, pawn), TargetThingA.HashOffsetTicks()) % GenTicks.TicksPerRealSecond != 0)
-                        return;
-                    float hpLossAmount = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) * Settings.destructionSpeed;
-
-                    if (isDestroyingHumanlikeCorpse)
+                    if (TargetThingA is Corpse corpse && corpse.InnerPawn.RaceProps.Humanlike)
                     {
+                        Utility.Log($"The item {TargetThingA} being destroyed is a humanlike corpse. All colonists will get {DestroyItemDefOf.Thought_KnowDestroyedCorpse} thoughts and {pawn} also {DestroyItemDefOf.Thought_DestroyedCorpse}.");
                         pawn.needs?.mood?.thoughts?.memories.TryGainMemory(DestroyItemDefOf.Thought_DestroyedCorpse);
                         List<Pawn> pawnsInFaction = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction);
                         for (int i = 0; i < pawnsInFaction.Count; i++)
                             pawnsInFaction[i].needs?.mood?.thoughts?.memories.TryGainMemory(DestroyItemDefOf.Thought_KnowDestroyedCorpse);
                     }
-                    else if (isDestroyingHumanEmbryo)
+                    else if (TargetThingA is HumanEmbryo)
+                    {
+                        Utility.Log($"The item {TargetThingA} being destroyed is a human embryo. {pawn} will get a {DestroyItemDefOf.Thought_DestroyedEmbryo} thought).");
                         pawn.needs?.mood?.thoughts?.memories.TryGainMemory(DestroyItemDefOf.Thought_DestroyedEmbryo);
+                    }
+                },
+
+                tickAction = () =>
+                {
+                    if ((Find.TickManager.TicksGame + hashcode) % GenTicks.TicksPerRealSecond != 0)
+                        return;
+                    float hpLossAmount = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) * Settings.destructionSpeed;
 
                     if (Settings.instantDestruction || hpLossAmount >= TargetThingA.HitPoints)
                     {
@@ -64,6 +61,7 @@ namespace DestroyItem
                 destroyToil.WithProgressBar(TargetIndex.A, () => 1 - (float)TargetThingA.HitPoints / TargetThingA.MaxHitPoints);
             destroyToil.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             yield return destroyToil;
+
             yield break;
         }
     }
