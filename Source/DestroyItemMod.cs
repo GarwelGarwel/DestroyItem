@@ -22,11 +22,21 @@ namespace DestroyItem
             content.CheckboxLabeled("Instant destruction", ref Settings.instantDestruction, "Destroy items instantly.");
             if (!Settings.instantDestruction)
             {
-                content.Label(
+                destructionSpeedPower = (float)Math.Round(content.SliderLabeled(
                     $"Destruction speed: {Settings.destructionSpeed.ToStringPercent()}",
-                    tooltip: "Relative speed of item destruction. Actual speed depends on the pawn's melee damage and general labor speed.");
-                destructionSpeedPower = (float)Math.Round(content.Slider(destructionSpeedPower, -1, 1), 2);
+                    destructionSpeedPower,
+                    -1,
+                    1,
+                    0.30f,
+                    "Relative speed of item destruction. Actual speed depends on the pawn's melee damage and general labor speed."), 1);
                 Settings.destructionSpeed = Mathf.Pow(10, destructionSpeedPower);
+                Settings.maxDestroyers = Mathf.RoundToInt(content.SliderLabeled(
+                    $"Max simultaneous destroyers: {Settings.maxDestroyers.ToStringCached()}",
+                    Settings.maxDestroyers,
+                    1,
+                    8,
+                    0.30f,
+                    "Max number of pawns that can be destroying the same item together. Default: 2."));
             }
             content.End();
         }
