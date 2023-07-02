@@ -58,7 +58,6 @@
 			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
 			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
 			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
-			<li MayRequire="Ludeon.RimWorld.Ideology">Corpses_DontCare</li>
 		</nullifyingPrecepts>
 		<nullifyingTraits>
 			<li>Psychopath</li>
