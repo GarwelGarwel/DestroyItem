@@ -57,7 +57,7 @@ namespace DestroyItem
 
                 defaultCompleteMode = ToilCompleteMode.Never
             };
-            if (TargetThingA.def.useHitPoints)
+            if (TargetThingA.def.useHitPoints && !Settings.instantDestruction)
                 destroyToil.WithProgressBar(TargetIndex.A, () => 1 - (float)TargetThingA.HitPoints / TargetThingA.MaxHitPoints);
             destroyToil.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             yield return destroyToil;
