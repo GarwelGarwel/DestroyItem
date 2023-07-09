@@ -33,9 +33,10 @@ namespace DestroyItem
                 DesignateThing(thing);
         }
 
-        public override AcceptanceReport CanDesignateThing(Thing t) => t.def.HasComp(typeof(CompDestructible)) && !t.IsDesignatedForDestruction();
+        public override AcceptanceReport CanDesignateThing(Thing t) =>
+            t.def.category == ThingCategory.Item && t.def.destroyable && !t.IsDesignatedForDestruction();
 
-        public override void DesignateThing(Thing t) => t.DesignateForDestruction();
+        public override void DesignateThing(Thing t) => t.Map.designationManager.AddDesignation(new Designation(t, Designation));
 
         IEnumerable<Thing> DestructiblesInCell(IntVec3 loc) => loc.GetThingList(Map).Where(thing => CanDesignateThing(thing).Accepted);
     }
