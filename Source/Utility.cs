@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using System;
+using Verse;
 
 namespace DestroyItem
 {
@@ -11,14 +12,25 @@ namespace DestroyItem
 
     public static class Utility
     {
+        /// <summary>
+        /// Adds Designator T to the reverse designator database. The database is reset after every map switch, so it should be called at least as often
+        /// </summary>
+        public static void RegisterDesignator<T>() where T : Designator
+        {
+            if (Find.ReverseDesignatorDatabase != null)
+            {
+                if (Find.ReverseDesignatorDatabase.Get<T>() == null)
+                {
+                    Find.ReverseDesignatorDatabase.AllDesignators.Add(Activator.CreateInstance<T>());
+                    if (Find.ReverseDesignatorDatabase.Get<T>() == null)
+                        Log($"Could not add {typeof(T).Name} to the reverse designator database!", LogLevel.Error);
+                }
+            }
+            else Log("Designator database is null.", LogLevel.Error);
+        }
+
         public static bool IsDesignatedForDestruction(this Thing thing) =>
             thing?.Map?.designationManager?.DesignationOn(thing, DestroyItemDefOf.Designation_DestroyItem) != null;
-
-        public static void DesignateForDestruction(this Thing thing)
-        {
-            Log($"Designating {thing} ({thing.def}) for destruction.");
-            thing.Map.designationManager.AddDesignation(new Designation(thing, DestroyItemDefOf.Designation_DestroyItem));
-        }
 
         internal static void Log(string message, LogLevel logLevel = LogLevel.Message)
         {
