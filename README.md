@@ -8,7 +8,7 @@ We have you covered!
 
 ## Features
 
-- Destroy nearly any sort of item: apparel, weapons, resources, corpses etc. (only chunks and some unusual items are not covered)
+- Destroy any sort of item: apparel, weapons, resources, corpses etc.
 
 - Designate one or multiple items for destruction with Architect > Order > Destroy Item tool. Or just press the relevant key (`X` by default).
 
@@ -16,7 +16,11 @@ We have you covered!
 
 - No resources are given back, but there is also no filth. Clean job!
 
-- Most pawns will despise destruction of humanlike corpses (although slightly less so than butchering them) and human embryos.
+- Multiple pawns (adjustable in the settings, 2 by default) may destroy the same item simultaneously to make it faster
+
+- Most pawns will despise destruction of humanlike corpses (although slightly less so than butchering them) and human embryos
+
+- Wastepacks and other such items emit toxic gas and pollute terrain when destroyed (no cheating!)
 
 Be careful with silver, steel, plasteel and other such resources: they have no HP in RimWorld and are destroyed immediately.
 
