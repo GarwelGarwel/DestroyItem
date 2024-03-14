@@ -40,9 +40,11 @@ namespace DestroyItem
                 {
                     if ((Find.TickManager.TicksGame + hashcode) % GenTicks.TicksPerRealSecond != 0)
                         return;
-                    float hpLossAmount = pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) * Settings.destructionSpeed;
+                    float hpLossAmount = Settings.instantDestruction
+                    ? TargetThingA.HitPoints
+                    : pawn.GetStatValue(StatDefOf.MeleeDPS) * pawn.GetStatValue(StatDefOf.GeneralLaborSpeed) * Settings.destructionSpeed;
 
-                    if (Settings.instantDestruction || hpLossAmount >= TargetThingA.HitPoints)
+                    if (hpLossAmount >= TargetThingA.HitPoints)
                     {
                         pawn.records?.Increment(DestroyItemDefOf.Record_ItemsDestroyed);
                         TargetThingA.HitPoints = 0;
@@ -57,8 +59,9 @@ namespace DestroyItem
 
                 defaultCompleteMode = ToilCompleteMode.Never
             };
-            if (TargetThingA.def.useHitPoints && !Settings.instantDestruction)
-                destroyToil.WithProgressBar(TargetIndex.A, () => 1 - (float)TargetThingA.HitPoints / TargetThingA.MaxHitPoints);
+            float maxHP = Settings.instantDestruction ? 0 : TargetThingA.MaxHitPoints;
+            if (maxHP > 0)
+                destroyToil.WithProgressBar(TargetIndex.A, () => 1 - TargetThingA.HitPoints / maxHP);
             destroyToil.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
             yield return destroyToil;
 
