@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+  
+  <KeyBindingDef ParentName="GameMapKeyBinding">
+    <defName>KeyBinding_DestroyItem</defName>
+    <label>destroy item</label>
+    <category>SelectionSpecial</category>
+    <defaultKeyCodeA>X</defaultKeyCodeA>
+  </KeyBindingDef>
+
+</Defs>

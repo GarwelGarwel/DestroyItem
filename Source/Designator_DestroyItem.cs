@@ -8,7 +8,7 @@ namespace DestroyItem
 {
     public class Designator_DestroyItem : Designator
     {
-        public override int DraggableDimensions => 2;
+        public override DrawStyleCategoryDef DrawStyleCategory => DrawStyleCategoryDefOf.Orders;
 
         protected override DesignationDef Designation => DestroyItemDefOf.Designation_DestroyItem;
 
@@ -39,5 +39,7 @@ namespace DestroyItem
         public override void DesignateThing(Thing t) => t.Map.designationManager.AddDesignation(new Designation(t, Designation));
 
         IEnumerable<Thing> DestructiblesInCell(IntVec3 loc) => loc.GetThingList(Map).Where(thing => CanDesignateThing(thing).Accepted);
+
+        public override void SelectedUpdate() => GenUI.RenderMouseoverBracket();
     }
 }
